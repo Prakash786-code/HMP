@@ -1,0 +1,100 @@
+/* Sidebar container */
+.sidebar {
+    background-color: #f2f3f4;
+    height: 100vh;
+    padding-top: 70px;   /* space for fixed navbar */
+    border-right: 1px solid #ddd;
+}
+
+/* Sidebar links */
+.sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+/* Icon spacing */
+.sidebar a i {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+/* Hover effect */
+.sidebar a:hover {
+    background-color: #ddd;
+    color: #c62828;
+}
+
+/* Active link (optional) */
+.sidebar a.active {
+    background-color: #e3f2fd;
+    border-left: 4px solid #c62828;
+}
+
+
+/* DataTable Spacing & Readability */
+
+table.dataTable thead th {
+    padding: 14px 18px !important;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+table.dataTable tbody td {
+    padding: 12px 18px !important;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+table.dataTable {
+    border-collapse: separate !important;
+    border-spacing: 0 8px !important;
+}
+
+.dataTables_wrapper {
+    overflow-x: auto;
+}
+
+tbody tr {
+    background-color: #ffffff;
+}
+
+table.dataTable tbody tr:hover {
+    background-color: #f2f6ff;
+}
+
+
+
+.profile-menu {
+    width: 240px;
+    border-radius: 10px;
+    padding: 8px 0;
+}
+
+.profile-menu .dropdown-item {
+    padding: 10px 20px;
+    font-size: 15px;
+}
+
+.profile-menu .dropdown-item:hover {
+    background-color: #f5f5f5;
+}
+
+.logout-item {
+    color: #dc3545 !important;
+    font-weight: 500;
+}
+
+
+.paginate_button {
+    cursor: pointer !important;
+}
+
+.paginate_button.disabled {
+    cursor: not-allowed !important;
+}

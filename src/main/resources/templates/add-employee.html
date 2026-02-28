@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: layout}">
+
+<section>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+
+            <div class="card mt-4 shadow">
+                <div class="card-body">
+
+                    <h4 class="text-center mb-3">
+                        Employee Registration Form
+                    </h4>
+                    <hr>
+
+                    <form th:action="@{/save-employee}" 
+					th:object="${employee}"
+					method="post">
+
+
+					<div class="mb-3">
+					    <label class="form-label">Employee Name</label>
+					    <input type="text" th:field="*{employeeName}" class="form-control">
+
+					    <p th:if="${#fields.hasErrors('employeeName')}"
+					       th:errors="*{employeeName}"
+					       class="text-danger"></p>
+					   <!-- Email -->
+					   <div class="mb-3">
+					       <label class="form-label">Email</label>
+					       <input type="email" th:field="*{email}" class="form-control">
+
+					       <p th:if="${#fields.hasErrors('email')}"
+					          th:errors="*{email}"
+					          class="text-danger"></p>
+					   </div>
+
+
+					   <!-- Gender -->
+					   <div class="mb-3">
+					       <label class="form-label">Gender</label><br>
+
+					       <input type="radio" th:field="*{gender}" value="Male"> Male
+					       &nbsp;&nbsp;
+					       <input type="radio" th:field="*{gender}" value="Female"> Female
+
+					       <p th:if="${#fields.hasErrors('gender')}"
+					          th:errors="*{gender}"
+					          class="text-danger"></p>
+					   </div>
+
+
+					   <!-- Date of Birth -->
+					   <div class="mb-3">
+					       <label class="form-label">Date of Birth</label>
+					       <input type="date" th:field="*{dob}" class="form-control">
+
+					       <p th:if="${#fields.hasErrors('dob')}"
+					          th:errors="*{dob}"
+					          class="text-danger"></p>
+					   </div>
+
+
+					   <!-- Joining Date -->
+					   <div class="mb-3">
+					       <label class="form-label">Joining Date</label>
+					       <input type="date" th:field="*{joiningDate}" class="form-control">
+
+					       <p th:if="${#fields.hasErrors('joiningDate')}"
+					          th:errors="*{joiningDate}"
+					          class="text-danger"></p>
+					   </div>
+
+
+					   <!-- Mobile Number -->
+					   <div class="mb-3">
+					       <label class="form-label">Mobile Number</label>
+					       <input type="text" th:field="*{mobile}" class="form-control">
+
+					       <p th:if="${#fields.hasErrors('mobile')}"
+					          th:errors="*{mobile}"
+					          class="text-danger"></p>
+					   </div>
+
+
+					   <!-- Aadhaar Number -->
+					   <div class="mb-3">
+					       <label class="form-label">Aadhaar Number</label>
+					       <input type="text" th:field="*{aadhaarNumber}" class="form-control">
+
+					       <p th:if="${#fields.hasErrors('aadhaarNumber')}"
+					          th:errors="*{aadhaarNumber}"
+					          class="text-danger"></p>
+					   </div>
+
+
+					   <!-- Account Number -->
+					   <div class="mb-3">
+					       <label class="form-label">Account Number</label>
+					       <input type="text" th:field="*{accountNumber}" class="form-control">
+
+					       <p th:if="${#fields.hasErrors('accountNumber')}"
+					          th:errors="*{accountNumber}"
+					          class="text-danger"></p>
+					   </div>
+
+                  
+						<div class="mb-3">
+						    <label class="form-label">Department</label>
+
+						    <select id="department"
+						            th:field="*{department}"
+						            class="form-select">
+						        <option value="">Select Department</option>
+						        <option value="Development">Development</option>
+						        <option value="QA & Automation Testing">QA & Automation Testing</option>
+						        <option value="Networking">Networking</option>
+						        <option value="HR Team">HR Team</option>
+						        <option value="Security">Security</option>
+						        <option value="Sales Marketing">Sales Marketing</option>
+						    </select>
+						</div>
+
+						<div class="mb-3">
+						    <label class="form-label">Designation</label>
+
+						    <select id="designation"
+						            th:field="*{designation}"
+						            class="form-select">
+						        <option value="">Select Designation</option>
+						    </select>
+						</div>
+						
+					
+						<div class="mb-3">
+						    <label class="form-label">Previous Company Name</label>
+						    <input type="text" th:field="*{previousCompany}" class="form-control">
+						</div>
+
+						<!-- PF Number -->
+						<div class="mb-3">
+						    <label class="form-label">PF Number</label>
+						    <input type="text" th:field="*{pfNumber}" class="form-control">
+
+						    <p th:if="${#fields.hasErrors('pfNumber')}"
+						       th:errors="*{pfNumber}"
+						       class="text-danger"></p>
+						</div>
+
+
+						<!-- Salary -->
+						<div class="mb-3">
+						    <label class="form-label">Salary</label>
+						    <input type="number" th:field="*{salary}" class="form-control">
+
+						    <p th:if="${#fields.hasErrors('salary')}"
+						       th:errors="*{salary}"
+						       class="text-danger"></p>
+						</div>
+
+
+						<!-- Current Address -->
+						<div class="mb-3">
+						    <label class="form-label">Current Address</label>
+						    <textarea th:field="*{currentAddress}" 
+						              class="form-control" 
+						              rows="3"></textarea>
+
+						    <p th:if="${#fields.hasErrors('currentAddress')}"
+						       th:errors="*{currentAddress}"
+						       class="text-danger"></p>
+						</div>
+
+
+						<!-- Permanent Address -->
+						<div class="mb-3">
+						    <label class="form-label">Permanent Address</label>
+						    <textarea th:field="*{permanentAddress}" 
+						              class="form-control" 
+						              rows="3"></textarea>
+
+						    <p th:if="${#fields.hasErrors('permanentAddress')}"
+						       th:errors="*{permanentAddress}"
+						       class="text-danger"></p>
+						</div>
+						
+						<!-- Role -->
+						<div class="mb-3">
+						    <label for="role" class="form-label">Role</label>
+
+						    <select th:field="*{role}"
+						            id="role"
+						            class="form-select"
+						            th:classappend="${#fields.hasErrors('role')} ? 'is-invalid' : ''">
+
+						        <option value="">-- Select Role --</option>
+						        <option value="USER">User</option>
+						        <option value="ADMIN">Admin</option>
+
+						    </select>
+
+						    <p th:if="${#fields.hasErrors('role')}"
+						       th:errors="*{role}"
+						       class="text-danger"></p>
+						</div>
+
+						<!-- Active Toggle -->
+						<div class="mb-3">
+						    <label class="form-label d-block">Active</label>
+
+						    <div class="form-check form-switch">
+						        <input class="form-check-input"
+						               type="checkbox"
+									   th:field="*{active}">
+						               
+						    </div>
+						</div>
+
+
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary px-4">
+                                Submit
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </div>
+  
+</section>
+
+</html>

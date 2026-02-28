@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: layout}">
+
+<section>
+<h4 style="text-align:center">Update Employee Registration Form</h4>
+<hr>
+
+<div class="container mt-3">
+
+<form th:action="@{/update-employee}" 
+      th:object="${employee}" 
+      method="post">
+	  
+	 
+
+    <!-- Hidden ID -->
+    <input type="hidden" th:field="*{id}"/>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+            <label>Employee Name</label>
+            <input type="text" class="form-control" th:field="*{employeeName}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Email</label>
+            <input type="email" class="form-control" th:field="*{email}">
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Gender</label>
+            <input type="text" class="form-control" th:field="*{gender}">
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>DOB</label>
+            <input type="date" class="form-control" th:field="*{dob}">
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Joining Date</label>
+            <input type="date" class="form-control" th:field="*{joiningDate}">
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Mobile</label>
+            <input type="text" class="form-control" th:field="*{mobile}">
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Aadhaar Number</label>
+            <input type="text" class="form-control" th:field="*{aadhaarNumber}">
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Account Number</label>
+            <input type="text" class="form-control" th:field="*{accountNumber}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Department</label>
+            <input type="text" class="form-control" th:field="*{department}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Designation</label>
+            <input type="text" class="form-control" th:field="*{designation}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Previous Company</label>
+            <input type="text" class="form-control" th:field="*{previousCompany}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>PF Number</label>
+            <input type="text" class="form-control" th:field="*{pfNumber}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Salary</label>
+            <input type="number" class="form-control" th:field="*{salary}">
+        </div>
+
+		<div class="col-md-6 mb-3">
+		    <label>Active Status</label>
+		    <select class="form-control" th:field="*{active}">
+		        <option th:value="true">Yes</option>
+		        <option th:value="false">No</option>
+		    </select>
+		</div>
+
+        <div class="col-md-6 mb-3">
+            <label>Current Address</label>
+            <textarea class="form-control" th:field="*{currentAddress}"></textarea>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Permanent Address</label>
+            <textarea class="form-control" th:field="*{permanentAddress}"></textarea>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-3">
+        <button type="submit" class="btn btn-success">
+            Update Employee
+        </button>
+        <a th:href="@{/all-employee}" class="btn btn-secondary ms-2">
+            Cancel
+        </a>
+    </div>
+
+</form>
+</div>
+
+</section>
+</html>

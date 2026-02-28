@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{user-base :: layout}">
+	  <head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		</head>
+		<body>	
+			<section>
+				<div class="row mt-3">
+					<div class="col-md-8 offset-md-2">
+						<div class="card">
+							<div class ="card-body">
+								
+								<h4 style="text-align: center;">Compose</h4>
+								<hr>
+				      			<form th:action="@{/compose}"method="post">
+								<div class="mt-3">
+									<label for="subject" class="form-label"><b>Subject></b></label>
+									<input type="text" name ="subject" class="form-control"required="required">
+									</div>
+									
+								<div class="mt-3">
+									<label for="subject" class="form-label"><b>Write Here</b></label>
+						
+									
+									<textarea row="" cols="" name="text" required="required" style="width:100%"></textarea>
+									</div>		
+								
+								<div class="mt-3">	
+								<input type="submit" value="send" class="btn btn-primary"style="float:right;">
+								</div>	
+								
+							</form>
+							
+							<div class="mt-5">
+							    <h4>All Requests</h4>
+
+							    <table class="table table-bordered">
+							        <thead>
+							            <tr>
+							                <th>Subject</th>
+							                <th>Message</th>
+							                <th>Status</th>
+							                <th>Date</th>
+							            </tr>
+							        </thead>
+
+							        <tbody>
+							            <tr th:each="c : ${composeList}">
+							                <td th:text="${c.subject}"></td>
+							                <td th:text="${c.text}"></td>
+							                <td th:text="${c.status}"></td>
+							                <td th:text="${c.addedDate}"></td>
+							            </tr>
+							        </tbody>
+							    </table>
+							</div>
+							
+							
+						</div>
+						<div>
+						</div>
+									
+			      </section>
+		
+			     	</body>
+				   </html>

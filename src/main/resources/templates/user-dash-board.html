@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{user-base :: layout}">
+
+<section>
+    <h2> </h2>
+	
+	
+	<div class="row mt-3">
+
+	    <div class="col-6 col-sm-2 mt-2">
+	        <div class="card">
+	            <div class="card-body bg-warning text-white">
+	                <b>Pending[<span th:text="${pending}">0</span>]</b>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="col-6 col-sm-2 mt-2">
+	        <div class="card">
+	            <div class="card-body bg-success text-white">
+	                <b>Approved[<span th:text="${approved}">0</span>]</b>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="col-6 col-sm-2 mt-2">
+	        <div class="card">
+	            <div class="card-body bg-danger text-white">
+	                <b>Denied[<span th:text="${denied}">0</span>]</b>
+	            </div>
+	        </div>
+	    </div>
+		
+		<div class="col-6 col-sm-2 mt-2">
+				    <div class="card">
+				        <div class="card-body bg-secondary text-white" style="cursor: default;">
+				            <b>Cancelled[<span th:text="${cancelled}">0</span>]</b>
+				        </div>
+				    </div>
+				</div>
+		
+
+	    <div class="col-6 col-sm-2 mt-2">
+	        <div class="card">
+	            <div class="card-body bg-primary text-white">
+	                <b>All[<span th:text="${total}">0</span>]</b>
+	            </div>
+	        </div>
+	    </div>
+		
+		
+	</div>
+<!--end above-->
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        <!-- LEFT SIDE : RECENT REQUESTS -->
+        <div class="col-md-8">
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Recent Requests</h5>
+                </div>
+
+                <div class="card-body p-0">
+
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="e : ${statusList}">
+                                <td th:text="${e.subject}"></td>
+                                <td th:text="${e.text}"></td>
+
+                                <td>
+                                    <span th:if="${e.status == 'approved'}"
+                                          class="badge bg-success">Approved</span>
+
+                                    <span th:if="${e.status == 'denied'}"
+                                          class="badge bg-danger">Denied</span>
+
+                                    <span th:if="${e.status == 'pending'}"
+                                          class="badge bg-warning text-dark">Pending</span>
+                                </td>
+
+                                <td th:text="${e.addedDate}"></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+<!-- RIGHT SIDE Birthday & Anni -->
+		<div class="col-md-4">
+		    <div class="card shadow-sm">
+		        <div class="card-header bg-white">
+		            <h5 class="mb-0">Birthday/Anniversary</h5>
+		        </div>
+
+		        <div class="card-body">
+		            <ul class="list-unstyled">
+
+		                <li th:each="event : ${events}" class="mb-3">
+
+		                    <!-- Icon -->
+							<i th:class="${event.eventType == 'Birthday'} ?
+							    'fa-solid fa-cake-candles text-danger' :
+							    'fa-solid fa-gift text-success'">
+							</i>
+
+		                    <!-- Name -->
+		                    <strong th:text="${event.employeeName}"></strong>
+
+		                    <!-- Event Type -->
+		                    -
+		                    <span th:text="${event.eventType}"
+		                          th:classappend="${event.eventType == 'Birthday'} ? 'text-danger' : 'text-success'">
+		                    </span>
+
+		                    <br>
+
+		                    <!-- Date -->
+		                    <small class="text-muted">
+		                        <span th:text="${#temporals.format(event.date, 'dd MMM yyyy')}"></span>
+		                    </small>
+
+		                </li>
+
+		            </ul>
+
+		            <!-- If no events -->
+		            <div th:if="${#lists.isEmpty(events)}" class="text-muted">
+		                No upcoming events in next 7 days.
+		            </div>
+
+		        </div>
+		    </div>
+		</div>
+		<!-- CHATBOT -->
+		<!-- ================= CHATBOT ================= -->
+
+		<!-- Floating Button -->
+		<div id="chatToggle">
+		    <i class="fa-solid fa-comments"></i>
+		</div>
+
+		<!-- Chat Box -->
+		<div id="chatBox">
+		    <div class="chat-header">
+		        HR Assistant
+		        <span onclick="toggleChat()" style="cursor:pointer;">✖</span>
+		    </div>
+
+		    <div id="chatBody" class="chat-body">
+		        <div class="bot-msg">Hello 👋 How can I help you?</div>
+		    </div>
+
+		    <div class="chat-footer">
+		        <input type="text" id="chatInput" placeholder="Type message..."
+		               onkeypress="if(event.key==='Enter') sendMessage()">
+		        <button onclick="sendMessage()">Send</button>
+		    </div>
+		</div>
+
+		<style>
+		#chatToggle{
+		    position:fixed;
+		    bottom:20px;
+		    right:20px;
+		    width:60px;
+		    height:60px;
+		    background:#0d6efd;
+		    color:white;
+		    border-radius:50%;
+		    display:flex;
+		    justify-content:center;
+		    align-items:center;
+		    cursor:pointer;
+		    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+		    z-index:1000;
+		}
+
+		#chatBox{
+		    display:none;
+		    position:fixed;
+		    bottom:90px;
+		    right:20px;
+		    width:320px;
+		    background:white;
+		    border-radius:12px;
+		    box-shadow:0 6px 20px rgba(0,0,0,0.3);
+		    overflow:hidden;
+		    z-index:1000;
+		}
+
+		.chat-header{
+		    background:#0d6efd;
+		    color:white;
+		    padding:10px 15px;
+		    display:flex;
+		    justify-content:space-between;
+		    font-weight:500;
+		}
+
+		.chat-body{
+		    height:260px;
+		    overflow-y:auto;
+		    padding:10px;
+		    background:#f8f9fa;
+		}
+
+		.chat-footer{
+		    display:flex;
+		    border-top:1px solid #ddd;
+		}
+
+		.chat-footer input{
+		    flex:1;
+		    border:none;
+		    padding:10px;
+		    outline:none;
+		}
+
+		.chat-footer button{
+		    border:none;
+		    background:#0d6efd;
+		    color:white;
+		    padding:10px 15px;
+		}
+
+		.user-msg{
+		    text-align:right;
+		    margin-bottom:8px;
+		}
+
+		.user-msg span{
+		    background:#6c757d;
+		    color:white;
+		    padding:6px 10px;
+		    border-radius:10px;
+		    display:inline-block;
+		}
+
+		.bot-msg{
+		    margin-bottom:8px;
+		}
+
+		.bot-msg{
+		    background:#0d6efd;
+		    color:white;
+		    padding:6px 10px;
+		    border-radius:10px;
+		    display:inline-block;
+		}
+		</style>
+
+		<script>
+		function toggleChat(){
+		    const box=document.getElementById("chatBox");
+		    box.style.display = box.style.display==="none" || box.style.display==="" ? "block":"none";
+		}
+
+		document.getElementById("chatToggle").onclick=toggleChat;
+
+		function sendMessage(){
+		    const input=document.getElementById("chatInput");
+		    const message=input.value.trim();
+		    if(message==="") return;
+
+		    const chatBody=document.getElementById("chatBody");
+
+		    // User message
+		    chatBody.innerHTML+=`
+		        <div class="user-msg">
+		            <span>${message}</span>
+		        </div>
+		    `;
+
+		    let reply="I am your HR assistant.";
+
+		    const msg=message.toLowerCase();
+
+		    if(msg.includes("leave")){
+		        reply="You can apply leave from Leave Management section.";
+		    }
+		    else if(msg.includes("salary")){
+		        reply="Salary details are available in payroll section.";
+		    }
+		    else if(msg.includes("holiday")){
+		        reply="Holiday list is available in dashboard.";
+		    }
+		    else if(msg.includes("hi") || msg.includes("hello")){
+		        reply="Hello 😊 How can I assist you today?";
+		    }
+
+		    setTimeout(()=>{
+		        chatBody.innerHTML+=`
+		            <div class="bot-msg">${reply}</div>
+		        `;
+		        chatBody.scrollTop=chatBody.scrollHeight;
+		    },500);
+
+		    input.value="";
+		}
+		</script>
+		
+
+				
+</section>
+</body>
+</html>

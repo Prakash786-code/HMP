@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<section>
+    <h4 style="text-align:center" 
+        th:text="${selectedDepartment != null} ? 'Employees in ' + ${selectedDepartment} : 'All Employees'">
+    </h4>
+    <hr>
+
+    <div th:if="${selectedDepartment != null}" style="text-align:center; margin-bottom:10px;">
+        <a th:href="@{/all-employee}" class="btn btn-secondary btn-sm">Back to All Employees</a>
+    </div>
+
+    <div class="container-fluid mt-3">
+        <div class="table-responsive">
+            <table id="example" class="display novrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>EMP ID</th>
+                        <th>Employee Name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>DOB</th>
+                        <th>Joining Date</th>
+                        <th>Mobile</th>
+                        <th>AadhaarNumber</th>
+                        <th>Account No</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Previous Company</th>
+                        <th>PF Number</th>
+                        <th>Salary</th>
+                        <th>Current Address</th>
+                        <th>Permanent Address</th>
+                        <th>Active</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="e : ${allEmployee}">
+                        <td th:text="'HMP' + ${e.id}"></td>
+                        <td th:text="${e.employeeName}"></td>
+                        <td th:text="${e.email}"></td>
+                        <td th:text="${e.gender}"></td>
+                        <td th:text="${e.dob}"></td>
+                        <td th:text="${e.joiningDate}"></td>
+                        <td th:text="${e.mobile}"></td>
+                        <td th:text="${e.aadhaarNumber}"></td>
+                        <td th:text="${e.accountNumber}"></td>
+                        <td th:text="${e.department}"></td>
+                        <td th:text="${e.designation}"></td>
+                        <td th:text="${e.previousCompany}"></td>
+                        <td th:text="${e.pfNumber}"></td>
+                        <td th:text="${e.salary}"></td>
+                        <td th:text="${e.currentAddress}"></td>
+                        <td th:text="${e.permanentAddress}"></td>
+                        <td th:text="${e.active} ? 'Yes' : 'No'"></td>
+                        <td>
+                            <a th:href="@{/edit-employee/{id}(id=${e.id})}" class="text-primary">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a href="javascript:void(0);" class="text-danger ms-2"
+                               th:onclick="'confirmDelete(' + ${e.id} + ')'">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+</html>

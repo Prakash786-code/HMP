@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{user-base :: layout}">
+	  <head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		</head>
+		<body>
+<section>
+	<h1 class="text-center mt-4">User Profile</h1>
+	
+	<div class="row mb-3">
+		 
+		<div class="col-md-6 offset-md-3">
+			<div class="card">
+				
+				<div class="card-body">
+					
+					<div class="container text-center">
+					<img alt="img" src="https://www.pngall.com/wp-content/uploads/5/Profile-Transparent.png " style="height:100px">
+					<h5 th:text="${employee.employeeName}"></h5>
+					<p><i th:text="${employee.designation}"></i></p>
+				    <hr>
+				</div>
+				
+				
+				
+	<table class="table">
+				
+				  <tbody>
+				    <tr>
+				      <th scope="row">1</th>
+				      <td>Email</td>
+					  <td th:text="${employee.email}">Otto</td>
+				    
+				    </tr>
+				    <tr>
+				      <th scope="row">2</th>
+				      <td>Gender</td>
+				      <td th:text="${employee.gender}">Thornton</td>
+				    
+				    </tr>
+				    <tr>
+				      <th scope="row">3</th>
+					  <td>Date Of Birthday</td>
+				      <td th:text="${employee.dob}"></td>
+				      </tr>
+					  
+					  <tr>
+					    <th scope="row">4</th>
+				        <td>Joining Date</td>
+					    <td th:text="${employee.joiningDate}"></td>
+					  	 </tr>
+					  
+						 
+						 <tr>
+						 	<th scope="row">5</th>
+						 	<td>Contact Number</td>
+						 	<td th:text="${employee.mobile}"></td>
+						  </tr>
+						 		
+						  
+						  <tr>
+						   <th scope="row">6</th>
+						  	<td>Previous Company</td>
+						  	<td th:text="${employee.previousCompany}"></td>
+						   </tr>
+						   
+						   <tr>
+						   	 <th scope="row">7</th>
+						   	<td> currentAddress</td>
+						   	<td th:text="${employee. currentAddress}"></td>
+						   </tr>
+						   					 						   
+
+						 <tr>
+						 <th scope="row">8</th>
+					 	<td> permanentAddressr</td>
+						 <td th:text="${employee. permanentAddress}"></td>
+						  </tr>
+						   					   		  					 					  		
+						 	 
+				  </tbody>
+				</table>
+					
+					
+	  </div>	
+	  </div>
+	  </div>
+	  </div>
+
+	
+	
+	</section>
+	</body>
+	</html>

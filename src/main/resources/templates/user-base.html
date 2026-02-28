@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout">
+
+<head>
+    <title>HMP</title>
+
+    <link rel="icon"
+          href="https://cdn-icons-png.flaticon.com/512/295/295128.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-dark bg-success fixed-top">
+    <div class="container-fluid">
+
+        <a class="navbar-brand fw-bold" th:href="@{/user-dashboard}">
+            HR Management Portal
+        </a>
+
+        <div class="d-flex align-items-center">
+
+            <a th:href="@{/user-dashboard}" class="btn btn-primary btn-sm me-2">
+                Dashboard
+            </a>
+
+            <a th:href="@{/user-compose}" class="btn btn-primary btn-sm me-2">
+                Compose
+            </a>
+
+            <a th:href="@{/user-profile}" class="btn btn-primary btn-sm me-2">
+                My Profile
+            </a>
+
+            <a th:href="@{/user-setting}" class="btn btn-primary btn-sm me-3">
+                Setting
+            </a>
+
+            <!-- ===== PROFILE DROPDOWN ===== -->
+            <div class="dropdown"
+                 th:if="${employee != null}">
+
+                <!-- Profile Icon -->
+                <a href="#"
+                   class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                   id="profileDropdown"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false">
+
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.eU8MYLNMRBadK-YgTT6FJQHaHw?pid=Api&P=0&h=180"
+                         class="rounded-circle"
+                         width="35"
+                         height="35">
+                </a>
+
+                <!-- Dropdown Menu -->
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0"
+                    aria-labelledby="profileDropdown"
+                    style="min-width:250px;">
+
+                    <!-- Profile Header -->
+                    <li class="text-center p-3 bg-light border-bottom">
+
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.eU8MYLNMRBadK-YgTT6FJQHaHw?pid=Api&P=0&h=180"
+                             class="rounded-circle mb-2"
+                             width="60"
+                             height="60">
+
+                        <div>
+                            <strong th:text="${employee.employeeName}">
+                                User
+                            </strong><br>
+
+                            <small class="text-muted"
+                                   th:text="${employee.designation}">
+                                Designation
+                            </small>
+                        </div>
+                    </li>
+
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li>
+                        <a class="dropdown-item py-2"
+                           th:href="@{/user-profile}">
+                            <i class="fas fa-user me-2 text-primary"></i>
+                            My Profile
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item py-2 text-danger"
+                           th:href="@{/logout}">
+                            <i class="fas fa-sign-out-alt me-2"></i>
+                            Log out
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- ===== END DROPDOWN ===== -->
+
+        </div>
+    </div>
+</nav>
+
+<!-- ================= MAIN CONTENT ================= -->
+<div class="container-fluid" style="margin-top:70px;">
+
+    <main style="background:#f2f3f4; min-height:100vh; padding:20px;">
+
+        <!-- Page Content Injected Here -->
+        <div th:insert="~{::section}"></div>
+
+    </main>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

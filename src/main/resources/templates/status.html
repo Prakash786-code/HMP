@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: layout}">
+
+<section>
+
+	<div class="container mt-5">
+		<table id ="example" class="display nowrap" style="width:100%">
+			<thead>
+				<tr>
+					<th>S.No</th>
+					<th>Name</th>
+					<th>Position</th>
+					<th>Subject</th>
+					<th>Description</th>
+					
+					<th>Date</th>
+					<th>For Approve</th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr th:each="e : ${statusList}">
+
+			    <td th:text="${e.id}"></td>
+
+			    <td th:text="${e.empName}"></td>
+
+			    <td th:text="${e.position}"></td>
+
+			    <td th:text="${e.subject}"></td>
+
+			    <td th:text="${e.text}"></td>
+
+			    <td th:text="${e.addedDate}"></td>
+
+			    <td>
+
+				
+					    <span th:if="${e.status == 'pending'}">
+
+					        <a href="javascript:void(0);"
+					           class="text-success"
+					           th:onclick="'approved(' + ${e.id} + ')'">
+					            <i class="fa-solid fa-check-circle"></i>
+					        </a>
+
+					        <a href="javascript:void(0);"
+					           class="text-danger ms-2"
+					           th:onclick="'rejected(' + ${e.id} + ')'">
+					            <i class="fa-solid fa-times-circle"></i>
+					        </a>
+
+					        <span class="ms-2 text-warning">Pending</span>
+
+					    </span>
+
+					    <span th:if="${e.status == 'approved'}"
+					          class="text-success fw-bold">
+					        Approved
+					    </span>
+
+					    <span th:if="${e.status == 'denied'}"
+					          class="text-danger fw-bold">
+					        Denied
+					    </span>
+
+					
+
+			    </td>
+
+			</tr>
+			</tbody>
+					</table>
+					</div>
+				</section>
+
+           </html>
